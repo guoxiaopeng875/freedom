@@ -15,7 +15,7 @@ func init() {
 	freedom.Prepare(func(initiator freedom.Initiator) {
 		initiator.BindInfra(true, eventManager) //单例绑定
 		initiator.InjectController(func(ctx freedom.Context) (com *EventManager) {
-			initiator.GetInfra(ctx, &com)
+			initiator.FetchInfra(ctx, &com)
 			return
 		})
 	})

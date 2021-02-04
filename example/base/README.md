@@ -101,9 +101,9 @@ type Initiator interface {
     //注入实例到控制器，适配iris的注入方式。
     InjectController(f interface{})
     //配合InjectController
-    GetInfra(ctx iris.Context, com interface{})
+    FetchInfra(ctx iris.Context, com interface{})
     //配合InjectController
-    GetService(ctx iris.Context, service interface{})
+    FetchService(ctx iris.Context, service interface{})
    
 
 
@@ -309,7 +309,7 @@ func init() {
             })
             initiator.InjectController(func(ctx freedom.Context) (service *Default) {
                 //Default 注入到控制器
-                initiator.GetService(ctx, &service)
+                initiator.FetchService(ctx, &service)
                 return
             })
 	})

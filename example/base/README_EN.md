@@ -94,7 +94,7 @@ type Initiator interface {
     // Bind Service
     BindService(f interface{})
     // Get Service
-    GetService(ctx iris.Context, service interface{})
+    FetchService(ctx iris.Context, service interface{})
     // Inject Somethings to Controller
     InjectController(f interface{})
     // Bind Factory
@@ -106,7 +106,7 @@ type Initiator interface {
     // Get Infrastructure. 
   	// Only the controller obtains the component that needs to be called in Prepare, 
   	// and service and repository can be directly dependency injected
-    GetInfra(ctx iris.Context, com interface{})
+    FetchInfra(ctx iris.Context, com interface{})
     // Start Callback Function: After Prepare And Before Run
     Start(f func(starter Starter))
     Iris() *iris.Application
@@ -305,7 +305,7 @@ func init() {
             })
             initiator.InjectController(func(ctx freedom.Context) (service *Default) {
                 // Injected Default to Controller
-                initiator.GetService(ctx, &service)
+                initiator.FetchService(ctx, &service)
                 return
             })
 	})
