@@ -227,7 +227,7 @@ type Single struct {
 }
 
 // Booting 单例组件入口, 启动时调用一次。
-func (c *Single) Booting(boot freedom.SingleBoot) {
+func (c *Single) Booting(boot freedom.BootManager) {
 	freedom.Logger().Info("Single.Booting")
 	c.life = rand.Intn(100)
 }

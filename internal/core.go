@@ -31,7 +31,7 @@ type Initiator interface {
 	FetchInfra(ctx iris.Context, com interface{})
 	// Listen Event
 	ListenEvent(eventName string, objectMethod string, appointInfra ...interface{})
-	Booting(f func(bootManager BootManager))
+	BindBooting(f func(bootManager BootManager))
 	Iris() *iris.Application
 }
 
@@ -43,11 +43,6 @@ type BootManager interface {
 	// Sync cache warm-up
 	CacheWarmUp(f func(repo *Repository))
 	FetchSingleInfra(infra interface{}) bool
-}
-
-// SingleBoot represents singleton startup component.
-type SingleBoot interface {
-	Iris() *iris.Application
 	//Pass in the current component to get the event path, which can bind the specified component.
 	EventsPath(infra interface{}) map[string]string
 	//Register for a shutdown event.

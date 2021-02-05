@@ -42,7 +42,7 @@ type (
 	Infra = internal.Infra
 
 	//SingleBoot .
-	SingleBoot = internal.SingleBoot
+	SingleBoot = internal.BootManager
 
 	//Entity is the entity's father interface.
 	Entity = internal.Entity

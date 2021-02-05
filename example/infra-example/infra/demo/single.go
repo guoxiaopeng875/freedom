@@ -22,7 +22,7 @@ type Single struct {
 }
 
 // Booting .
-func (s *Single) Booting(boot freedom.SingleBoot) {
+func (s *Single) Booting(boot freedom.BootManager) {
 	freedom.Logger().Info("Single.Booting")
 	s.life = rand.Intn(100)
 }

@@ -35,7 +35,7 @@ type EventManager struct {
 }
 
 // Booting .
-func (manager *EventManager) Booting(sb freedom.SingleBoot) {
+func (manager *EventManager) Booting(bootManager freedom.BootManager) {
 	if err := manager.db().AutoMigrate(&pubEventObject{}).Error; err != nil {
 		panic(err)
 	}

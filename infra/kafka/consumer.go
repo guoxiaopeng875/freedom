@@ -74,12 +74,12 @@ func (c *ConsumerImpl) Restart() error {
 }
 
 // Booting .
-func (c *ConsumerImpl) Booting(sb freedom.SingleBoot) {
+func (c *ConsumerImpl) Booting(bootManager freedom.BootManager) {
 	if len(c.addrs) == 0 {
 		return
 	}
-	c.topicPath = sb.EventsPath(c)
-	sb.RegisterShutdown(func() {
+	c.topicPath = bootManager.EventsPath(c)
+	bootManager.RegisterShutdown(func() {
 		if err := c.Close(); err != nil {
 			freedom.Logger().Error(err)
 		}

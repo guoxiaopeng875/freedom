@@ -60,7 +60,7 @@ func TestUtil(t *testing.T) {
 
 func SSS() JIEKOU {
 	dsbs := new(DSBS)
-	dsbs.a = "sb"
+	dsbs.a = "bootManager"
 	return dsbs
 }
 

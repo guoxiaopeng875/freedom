@@ -17,7 +17,6 @@ import (
 )
 
 var _ Initiator = (*Application)(nil)
-var _ SingleBoot = (*Application)(nil)
 var _ BootManager = (*Application)(nil)
 
 type (
@@ -342,7 +341,7 @@ func (app *Application) InstallSerializer(marshal func(v interface{}) ([]byte, e
 }
 
 // Booting adds a builder function which builds a BootManager.
-func (app *Application) Booting(f func(bootManager BootManager)) {
+func (app *Application) BindBooting(f func(bootManager BootManager)) {
 	bootManagers = append(bootManagers, f)
 }
 
