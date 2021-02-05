@@ -35,7 +35,7 @@ func NewUnitTest() UnitTest {
 
 // FetchService .
 func (u *UnitTestImpl) FetchService(service interface{}) {
-	globalApp.GetService(u.rt.IrisContext(), service)
+	globalApp.FetchService(u.rt.IrisContext(), service)
 }
 
 // FetchRepository .
