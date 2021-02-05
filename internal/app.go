@@ -18,7 +18,7 @@ import (
 
 var _ Initiator = (*Application)(nil)
 var _ SingleBoot = (*Application)(nil)
-var _ Starter = (*Application)(nil)
+var _ BootManager = (*Application)(nil)
 
 type (
 	// Dependency is a function which represents a dependency of the application.
@@ -341,14 +341,9 @@ func (app *Application) InstallSerializer(marshal func(v interface{}) ([]byte, e
 	app.unmarshal = unmarshal
 }
 
-// AddStarter adds a builder function which builds a Starter.
-func (app *Application) AddStarter(f func(starter Starter)) {
-	starters = append(starters, f)
-}
-
-// Start adds a builder function which builds a Starter.
-func (app *Application) Start(f func(starter Starter)) {
-	starters = append(starters, f)
+// Booting adds a builder function which builds a BootManager.
+func (app *Application) Booting(f func(bootManager BootManager)) {
+	bootManagers = append(bootManagers, f)
 }
 
 // NewRunner can be used as an argument for the `Run` method.
@@ -454,9 +449,6 @@ func (app *Application) Run(runner IrisRunner, conf IrisConfiguration) {
 	globalApp.IrisApp.Logger().SetLevel(logLevel)
 
 	repositoryAPIRun(conf)
-	for i := 0; i < len(starters); i++ {
-		starters[i](app)
-	}
 	app.msgsBus.building()
 	app.comPool.singleBooting(app)
 	shutdownSecond := int64(2)
@@ -464,6 +456,10 @@ func (app *Application) Run(runner IrisRunner, conf IrisConfiguration) {
 		shutdownSecond = level.(int64)
 	}
 	app.shutdown(shutdownSecond)
+
+	for i := 0; i < len(bootManagers); i++ {
+		bootManagers[i](app)
+	}
 	app.Iris().Run(runner, iris.WithConfiguration(conf))
 }
 

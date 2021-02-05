@@ -51,7 +51,7 @@ type Application interface {
     //安装其他, 如mongodb、es 等
     InstallCustom(f func() interface{})
     //启动回调: Prepare之后，Run之前.
-    Start(f func(starter Starter))
+    Booting(f func(bootManager BootManager))
     //安装序列化，未安装默认使用官方json
     InstallSerializer(marshal func(v interface{}) ([]byte, error), unmarshal func(data []byte, v interface{}) error)
 }
@@ -75,7 +75,7 @@ type Worker interface {
     //With标准上下文
     WithContext(stdContext.Context)
     //该worker起始的时间
-    StartTime() time.Time
+    BootingTime() time.Time
     //延迟回收对象
     DelayReclaiming()
 }
@@ -108,7 +108,7 @@ type Initiator interface {
 
 
     //启动回调. Prepare之后，Run之前.
-    Start(f func(starter Starter))
+    Booting(f func(bootManager BootManager))
     //监听事件. 监听1个topic的事件，由指定控制器消费.
     ListenEvent(topic string, controller string})
     Iris() *iris.Application
@@ -123,8 +123,8 @@ type Initiator interface {
 |Application.InstallMiddleware| 注册安装的全局中间件|
 |Application.InstallDB|触发回调|
 |freedom.Prepare|触发回调|
-|Initiator.Starter|触发回调|
 |infra.Booting|触发组件方法|
+|Initiator.Booting|触发回调|
 |http.Run|开启监听服务|
 |infra.RegisterShutdown|触发回调|
 |Application.Close|程序关闭|
