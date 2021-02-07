@@ -358,11 +358,11 @@ type Default struct {
 
 // GetIP .
 func (repo *Default) GetIP() string {
-    //只有继承资源库后才有DB、Redis、NewHttp、Other 访问权限, 并且可以直接获取 Worker
+    //只有继承资源库后才有DB、Redis、NewHttp、Custom 访问权限, 并且可以直接获取 Worker
     repo.FetchDB(&db)
     repo.FetchSourceDB(&db)
     repo.Redis()
-    repo.Other()
+    repo.FetchCustom(&custom)
     repo.NewHttpRequest()
     repo.NewH2CRequest()
     repo.Worker().Logger().Infof("我是Repository GetIP")

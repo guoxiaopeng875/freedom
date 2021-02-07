@@ -110,7 +110,7 @@ func TestParsePoolFunc2(t *testing.T) {
 }
 
 func TestOther(t *testing.T) {
-	ot := newOther()
+	ot := newCustom()
 	ot.add(func() interface{} {
 		return &TestUser{Age: 100}
 	})
