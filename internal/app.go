@@ -280,12 +280,6 @@ func (app *Application) EventsPath(infra interface{}) map[string]string {
 	return app.msgsBus.EventsPath(infra)
 }
 
-// CacheWarmUp .
-func (app *Application) CacheWarmUp(f func(repo *Repository)) {
-	rb := new(Repository)
-	f(rb)
-}
-
 // InjectIntoController adds a Dependency for iris controller.
 func (app *Application) InjectIntoController(f Dependency) {
 	app.controllerDependencies = append(app.controllerDependencies, f)
