@@ -443,16 +443,17 @@ func (app *Application) Run(runner IrisRunner, conf IrisConfiguration) {
 
 	repositoryAPIRun(conf)
 	app.msgsBus.building()
+
 	app.comPool.singleBooting(app)
+	for i := 0; i < len(bootManagers); i++ {
+		bootManagers[i](app)
+	}
+
 	shutdownSecond := int64(2)
 	if level, ok := conf.Other["shutdown_second"]; ok {
 		shutdownSecond = level.(int64)
 	}
 	app.shutdown(shutdownSecond)
-
-	for i := 0; i < len(bootManagers); i++ {
-		bootManagers[i](app)
-	}
 	app.Iris().Run(runner, iris.WithConfiguration(conf))
 }
 
