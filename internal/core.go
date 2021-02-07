@@ -38,10 +38,6 @@ type Initiator interface {
 // BootManager .
 type BootManager interface {
 	Iris() *iris.Application
-	// Asynchronous cache warm-up
-	AsyncCacheWarmUp(f func(repo *Repository))
-	// Sync cache warm-up
-	CacheWarmUp(f func(repo *Repository))
 	FetchSingleInfra(infra interface{}) bool
 	//Pass in the current component to get the event path, which can bind the specified component.
 	EventsPath(infra interface{}) map[string]string

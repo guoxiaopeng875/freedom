@@ -286,12 +286,6 @@ func (app *Application) CacheWarmUp(f func(repo *Repository)) {
 	f(rb)
 }
 
-// AsyncCacheWarmUp .
-func (app *Application) AsyncCacheWarmUp(f func(repo *Repository)) {
-	rb := new(Repository)
-	go f(rb)
-}
-
 // InjectIntoController adds a Dependency for iris controller.
 func (app *Application) InjectIntoController(f Dependency) {
 	app.controllerDependencies = append(app.controllerDependencies, f)
