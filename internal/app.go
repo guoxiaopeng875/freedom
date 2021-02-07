@@ -58,7 +58,7 @@ type Application struct {
 	msgsBus *EventBus
 
 	// other .
-	other *other
+	other *custom
 
 	// unmarshal is a global deserializer for deserialize every []byte into object.
 	unmarshal func(data []byte, v interface{}) error
@@ -107,7 +107,7 @@ func NewApplication() *Application {
 		globalApp.factoryPool = newFactoryPool()
 		globalApp.comPool = newInfraPool()
 		globalApp.msgsBus = newMessageBus()
-		globalApp.other = newOther()
+		globalApp.other = newCustom()
 		globalApp.marshal = json.Marshal
 		globalApp.unmarshal = json.Unmarshal
 		globalApp.Prometheus = newPrometheus()
