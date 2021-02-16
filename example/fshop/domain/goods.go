@@ -1,6 +1,8 @@
 package domain
 
 import (
+	"encoding/json"
+
 	"github.com/8treenet/freedom/example/fshop/domain/aggregate"
 	"github.com/8treenet/freedom/example/fshop/domain/dependency"
 	"github.com/8treenet/freedom/example/fshop/domain/entity"
@@ -114,4 +116,10 @@ func (g *Goods) Shop(goodsID, goodsNum, userID int) (e error) {
 		return
 	}
 	return cmd.Shop()
+}
+
+// Get 获取商品
+func (g *Goods) Get(goodsID int) (entity json.Marshaler, e error) {
+	entity, e = g.GoodsRepo.Get(goodsID)
+	return
 }
