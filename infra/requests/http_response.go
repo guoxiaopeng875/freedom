@@ -73,7 +73,7 @@ func (res *Response) Cookies() []*http.Cookie {
 // GetCookie returns cookie's value by its name
 // returns empty string if nothing was found.
 func (res *Response) Cookie(name string) *http.Cookie {
-	for _, cookie := range res.cookies {
+	for _, cookie := range res.Cookies() {
 		if cookie.Name == name {
 			return cookie
 		}
