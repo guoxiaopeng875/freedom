@@ -43,7 +43,6 @@ func (res *Response) Clone() *Response {
 		ContentLength: res.ContentLength,
 		Uncompressed:  res.Uncompressed,
 		traceInfo:     res.traceInfo,
-		cookies:       res.cookies,
 	}
 }
 
