@@ -93,7 +93,11 @@ func (manager *EventManager) push(event freedom.DomainEvent) {
 }
 
 func (manager *EventManager) db() *gorm.DB {
-	return manager.SourceDB().(*gorm.DB)
+	var db *gorm.DB
+	if err := manager.FetchSourceDB(&db); err != nil {
+		panic(err)
+	}
+	return db
 }
 
 // Save .
