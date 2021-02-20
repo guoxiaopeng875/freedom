@@ -23,8 +23,8 @@ func (infra *Infra) BeginRequest(rt Worker) {
 	infra.worker = rt
 }
 
-// FetchSourceDB .
-func (infra *Infra) FetchSourceDB(db interface{}) error {
+// FetchOnlyDB .
+func (infra *Infra) FetchOnlyDB(db interface{}) error {
 	resultDB := globalApp.Database.db
 	if resultDB == nil {
 		return errors.New("DB not found, please install")

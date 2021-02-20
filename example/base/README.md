@@ -359,8 +359,8 @@ type Default struct {
 // GetIP .
 func (repo *Default) GetIP() string {
     //只有继承资源库后才有DB、Redis、NewHttp、Custom 访问权限, 并且可以直接获取 Worker
-    repo.FetchDB(&db)
-    repo.FetchSourceDB(&db)
+    repo.FetchDB(&db) //可包含基于请求运行时的DB句柄,被事务组件横切面控制
+    repo.FetchOnlyDB(&db) //全局唯一句柄
     repo.Redis()
     repo.FetchCustom(&custom)
     repo.NewHttpRequest()
