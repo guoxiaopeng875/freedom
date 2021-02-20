@@ -75,7 +75,7 @@ type Worker interface {
     //With标准上下文
     WithContext(stdContext.Context)
     //该worker起始的时间
-    BootingTime() time.Time
+    StartTime() time.Time
     //延迟回收对象
     DelayReclaiming()
 }
