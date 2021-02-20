@@ -55,7 +55,7 @@ func (t *GormImpl) execute(ctx context.Context, fun func() error, opts *sql.TxOp
 	}
 
 	var db *gorm.DB
-	if err := t.FetchSourceDB(&db); err != nil {
+	if err := t.FetchOnlyDB(&db); err != nil {
 		return err
 	}
 

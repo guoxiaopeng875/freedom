@@ -94,7 +94,7 @@ func (manager *EventManager) push(event freedom.DomainEvent) {
 
 func (manager *EventManager) db() *gorm.DB {
 	var db *gorm.DB
-	if err := manager.FetchSourceDB(&db); err != nil {
+	if err := manager.FetchOnlyDB(&db); err != nil {
 		panic(err)
 	}
 	return db
